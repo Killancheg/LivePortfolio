@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="LivePortfolio.Core/LivePortfolio.Core.csproj" />
+  <Project Path="LivePortfolio.Infrastructure/LivePortfolio.Infrastructure.csproj" />
+  <Project Path="LivePortfolio.Web/LivePortfolio.Web.csproj" />
+</Solution>
