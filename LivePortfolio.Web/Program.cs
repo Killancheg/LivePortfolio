@@ -1,10 +1,10 @@
+using LivePortfolio.Infrastructure;
 using LivePortfolio.Web.Components;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 
@@ -25,3 +25,18 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
+
+static void ConfigureServices(IServiceCollection services, ConfigurationManager configuration)
+{
+    var connectionString =
+    configuration.GetConnectionString("AppDbConnection")
+        ?? throw new InvalidOperationException("Connection string"
+        + "'AppDbConnection' not found.");
+
+    services.AddRazorComponents().AddInteractiveServerComponents();
+
+    //DataBase
+    services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString, 
+        b => b.MigrationsAssembly("LivePortfolio.Infrastructure")));
+}
