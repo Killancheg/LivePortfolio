@@ -23,4 +23,8 @@
     <ProjectReference Include="..\LivePortfolio.Infrastructure\LivePortfolio.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Identity\" />
+  </ItemGroup>
+
 </Project>

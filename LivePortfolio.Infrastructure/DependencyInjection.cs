@@ -1,8 +1,8 @@
-﻿using LivePortfolio.Infrastructure.Indentity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
+using LivePortfolio.Infrastructure.Identity;
 
 namespace LivePortfolio.Infrastructure
 {

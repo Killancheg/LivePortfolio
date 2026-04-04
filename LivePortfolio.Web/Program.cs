@@ -1,4 +1,5 @@
 using LivePortfolio.Infrastructure;
+using LivePortfolio.Infrastructure.Identity;
 using LivePortfolio.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ ConfigureServices(builder.Services, builder.Configuration);
 var app = builder.Build();
 
 ConfigureApp(app);
+await SeedData(app.Services);
 
 app.Run();
 
@@ -40,4 +42,11 @@ static void ConfigureApp(WebApplication app)
 
     app.MapRazorComponents<App>()
         .AddInteractiveServerRenderMode();
+}
+
+static async Task SeedData(IServiceProvider serviceProvider)
+{
+    using IServiceScope scope = serviceProvider.CreateScope();
+
+    await RoleSeeder.SeedAsync(scope.ServiceProvider);
 }

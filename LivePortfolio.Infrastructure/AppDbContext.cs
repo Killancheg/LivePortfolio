@@ -1,4 +1,4 @@
-﻿using LivePortfolio.Infrastructure.Indentity;
+﻿using LivePortfolio.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
