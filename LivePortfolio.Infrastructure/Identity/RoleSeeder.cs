@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using LivePortfolio.Core.Constants;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LivePortfolio.Infrastructure.Identity
@@ -8,7 +9,7 @@ namespace LivePortfolio.Infrastructure.Identity
         public static async Task SeedAsync(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            string[] roleNames = { "Admin", "Reviewer", "User" };
+            string[] roleNames = { Roles.Admin, Roles.Reviewer, Roles.User };
 
             foreach (string roleName in roleNames)
             {

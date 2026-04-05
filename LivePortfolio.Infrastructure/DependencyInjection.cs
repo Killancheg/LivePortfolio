@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using LivePortfolio.Infrastructure.Identity;
+using LivePortfolio.Infrastructure.Services;
+using LivePortfolio.Core.Services;
 
 namespace LivePortfolio.Infrastructure
 {
@@ -55,9 +57,11 @@ namespace LivePortfolio.Infrastructure
 
                 // User settings.
                 options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+&$%";
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+&$%*";
                 options.User.RequireUniqueEmail = true;
             });
+
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

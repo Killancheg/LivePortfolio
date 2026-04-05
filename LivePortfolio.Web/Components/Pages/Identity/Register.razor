@@ -1,0 +1,38 @@
+﻿@page "/register"
+
+<div class="container mt-5" style="max-width: 500px;">
+    <h3 class="mb-4">Register</h3>
+
+    <EditForm EditContext="EditContext" OnValidSubmit="SubmitAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary class="text-danger mb-3" />
+
+        <div class="mb-3">
+            <label class="form-label">User name</label>
+            <InputText class="form-control" @bind-Value="RegisterModel.UserName" />
+            <ValidationMessage For="() => RegisterModel.UserName" class="text-danger" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <InputText type="email" class="form-control" @bind-Value="RegisterModel.Email" />
+            <ValidationMessage For="() => RegisterModel.Email" class="text-danger" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <InputText type="password" class="form-control" @bind-Value="RegisterModel.Password" />
+            <ValidationMessage For="() => RegisterModel.Password" class="text-danger" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Confirm password</label>
+            <InputText type="password" class="form-control" @bind-Value="RegisterModel.ConfirmPassword" />
+            <ValidationMessage For="() => RegisterModel.ConfirmPassword" class="text-danger" />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+            Register
+        </button>
+    </EditForm>
+</div>
