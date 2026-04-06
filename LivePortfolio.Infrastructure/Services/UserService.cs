@@ -10,30 +10,41 @@ namespace LivePortfolio.Infrastructure.Services;
 public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public UserService(UserManager<ApplicationUser> userManager) 
+    public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) 
     {
         _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     public async Task<RegisterResult> RegisterAsync(RegisterRequest request)
     {
         var newUser = request.ToApplicationUser();
 
-        var registerResult = await _userManager.CreateAsync(newUser, request.Password);
-
-        if (registerResult.Succeeded) await _userManager.AddToRoleAsync(newUser, Roles.User);
-
-        return GetRegisterResult(registerResult);
-    }
-
-    private RegisterResult GetRegisterResult(IdentityResult identityResult)
-    {
-        if (identityResult.Succeeded)
+        var createResult = await _userManager.CreateAsync(newUser, request.Password);
+        if (!createResult.Succeeded)
         {
-            return RegisterResult.Success();
+            return RegisterResult.Failure(createResult.Errors.Select(e => e.Description));
         }
 
-        return RegisterResult.Failure(identityResult.Errors.Select(e => e.Description));
+        var roleResult = await _userManager.AddToRoleAsync(newUser, Roles.User);
+        if (!roleResult.Succeeded)
+        {
+            return RegisterResult.Failure(roleResult.Errors.Select(e => e.Description));
+        }
+
+        return RegisterResult.Success();
+    }
+
+    public async Task<AppUser?> GetCurrentUserAsync()
+    {
+        var user = await _userManager.GetUserAsync(_signInManager.Context.User);
+        if (user == null)
+        {
+            return null;
+        }
+
+        return user.ToAppUser();
     }
 }

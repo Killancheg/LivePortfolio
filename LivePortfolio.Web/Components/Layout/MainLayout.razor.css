@@ -96,3 +96,20 @@ main {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.login-panel {
+    animation: slideDownFade 0.18s ease-out;
+    transform-origin: top right;
+}
+
+@keyframes slideDownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

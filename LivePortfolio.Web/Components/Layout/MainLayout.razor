@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using LivePortfolio.Web.Components.Pages.Identity
+@inherits LayoutComponentBase
 
 <div class="page">
     <div class="sidebar">
@@ -6,12 +7,37 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        <div class="top-row px-4 d-flex justify-content-end align-items-center">
+            <AuthorizeView>
+                <NotAuthorized>
+                    <NavLink href="register" class="btn btn-link ms-3">
+                        Register
+                    </NavLink>
+                    <div class="position-relative">
+                        <div class="btn btn-link ms-3" @onclick="ToggleLoginPanel">
+                            Login
+                        </div>
 
-            <NavLink href="register" class="btn btn-link ms-3">
-                Register
-            </NavLink>
+                        @if (IsLoginPanelOpen)
+                        {
+                            <div class="card shadow position-absolute end-0 top-100 mt-2 p-3 login-panel"
+                                 style="width: 320px; z-index: 2000;">
+                                <LoginPanel ErrorCode="@LoginErrorCode" ReturnUrl="@CurrentRelativeUrl" />
+                            </div>
+                        }
+                    </div>
+                </NotAuthorized>
+                <Authorized>
+                    @if (CurrentUser is not null)
+                    {
+                        <span>Hello, @CurrentUser.Name</span>
+                    }
+                    <form action="/account/logout" method="post" class="d-inline">
+                        <AntiforgeryToken />
+                        <button type="submit" class="btn btn-link">Logout</button>
+                    </form>
+                </Authorized>
+            </AuthorizeView>
         </div>
 
         <article class="content px-4">

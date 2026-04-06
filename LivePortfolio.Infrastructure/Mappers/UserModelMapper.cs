@@ -13,5 +13,10 @@ namespace LivePortfolio.Infrastructure.Mappers
                 Email = request.Email
             };
         }
+
+        public static AppUser ToAppUser(this ApplicationUser applicationUser)
+        {
+            return new AppUser(applicationUser.UserName, applicationUser.Email);
+        }
     }
 }

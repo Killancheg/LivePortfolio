@@ -482,3 +482,4 @@ $RECYCLE.BIN/
 *.swp
 /LivePortfolio.Web/appsettings.Development.json
 /LivePortfolio.Web/appsettings.json
+/testUsers.txt

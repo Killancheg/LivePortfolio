@@ -1,5 +1,6 @@
 using LivePortfolio.Infrastructure;
 using LivePortfolio.Infrastructure.Identity;
+using LivePortfolio.Web;
 using LivePortfolio.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,7 @@ static void ConfigureApp(WebApplication app)
     app.UseAntiforgery();
     app.MapStaticAssets();
 
+    app.MapIdentity();
     app.MapRazorComponents<App>()
         .AddInteractiveServerRenderMode();
 }
