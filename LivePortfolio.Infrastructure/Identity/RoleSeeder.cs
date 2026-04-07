@@ -9,7 +9,7 @@ namespace LivePortfolio.Infrastructure.Identity
         public static async Task SeedAsync(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            string[] roleNames = { Roles.Admin, Roles.Reviewer, Roles.User };
+            string[] roleNames = { Roles.Admin, Roles.Reviewer, Roles.User, Roles.SuperAdmin};
 
             foreach (string roleName in roleNames)
             {
