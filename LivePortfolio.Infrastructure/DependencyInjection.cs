@@ -61,8 +61,13 @@ namespace LivePortfolio.Infrastructure
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddScoped<IUserService, UserService>();
+            return services;
+        }
 
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+        {
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGameService, GameService>();
             return services;
         }
     }

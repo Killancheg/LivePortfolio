@@ -21,6 +21,8 @@ static void ConfigureServices(IServiceCollection services, ConfigurationManager 
     services.AddPostgresDb(configuration);
 
     services.AddAppIdentity();
+
+    services.AddInfrastructureServices();
 }
 
 static void ConfigureApp(WebApplication app)
