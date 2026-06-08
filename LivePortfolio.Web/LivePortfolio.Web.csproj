@@ -23,4 +23,8 @@
     <ProjectReference Include="..\LivePortfolio.Infrastructure\LivePortfolio.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\placeholder-cover.png" />
+  </ItemGroup>
+
 </Project>

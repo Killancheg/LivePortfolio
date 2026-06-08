@@ -8,7 +8,6 @@ namespace LivePortfolio.Infrastructure.Mappers
         public static GameDTO ToGameDTO(this Game game)
         {
             return new GameDTO(
-
                 game.GameId,
                 game.Title,
                 game.Description,
@@ -18,7 +17,8 @@ namespace LivePortfolio.Infrastructure.Mappers
                 game.CreatorId,
                 game.IsApproved,
                 game.IsActive,
-                [.. game.Reviews.Select(r => r.ToReviewDTO())]
+                [.. game.Reviews.Select(r => r.ToReviewDTO())],
+                game.FinalScore
             );
         }
 

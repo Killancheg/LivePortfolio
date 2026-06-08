@@ -26,5 +26,7 @@
         public bool IsActive { get; set; }
 
         public ICollection<Review> Reviews { get; set; } = [];
+
+        public double? FinalScore { get; set; }
     }
 }

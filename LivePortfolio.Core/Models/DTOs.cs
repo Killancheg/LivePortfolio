@@ -14,6 +14,7 @@
         string CreatorId,
         bool IsApproved,
         bool IsActive,
-        IReadOnlyList<ReviewDTO> Reviews
+        IReadOnlyList<ReviewDTO> Reviews,
+        double? FinalScore
     );
 }

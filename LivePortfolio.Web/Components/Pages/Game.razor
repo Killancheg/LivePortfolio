@@ -1,0 +1,68 @@
+﻿@page "/games/{GameId:int}"
+
+<div class="container mt-4">
+    @if (_isLoading)
+    {
+        <div class="d-flex justify-content-center my-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading game details...</span>
+            </div>
+        </div>
+    }
+    else if (CurrentGame == null)
+    {
+        <div class="alert alert-warning text-center my-5" role="alert">
+            <h4 class="alert-heading">Game Not Found</h4>
+            <p>The game you are looking for does not exist or has been removed.</p>
+            <hr>
+            <a href="/games" class="btn btn-primary">
+                <i class="bi bi-arrow-left"></i> Back to Games List
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <img src="@GetCoverImageUrl(CurrentGame)" alt="@CurrentGame.Title Cover" class="img-fluid rounded shadow-sm" />
+            </div>
+
+            <div class="col-md-8">
+                <div class="d-flex justify-content-between align-items-start flex-wrap">
+                    <h1 class="display-5 fw-bold mb-3">@CurrentGame.Title</h1>
+
+                    <div class="fs-4 mb-3">
+                        @if (CurrentGame.FinalScore.HasValue)
+                        {
+                            <span class="badge bg-success">Score: @CurrentGame.FinalScore.Value.ToString("0.0")</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">No score yet</span>
+                        }
+                    </div>
+                </div>
+
+                <p class="text-muted">
+                    <strong>Release Date:</strong> @CurrentGame.ReleaseDate.ToString("MMMM dd, yyyy")
+                </p>
+
+                <hr />
+
+                <h3 class="h5 fw-bold">Description</h3>
+                <p class="text-body style-description">@CurrentGame.Description</p>
+
+                <div class="mt-4">
+                    <a href="/games" class="btn btn-outline-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .style-description {
+        white-space: pre-wrap;
+        line-height: 1.6;
+    }
+</style>

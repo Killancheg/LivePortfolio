@@ -20,6 +20,8 @@ namespace LivePortfolio.Web.Components.Layout
 
         protected override async Task OnInitializedAsync()
         {
+            await base.OnInitializedAsync();
+
             CurrentUser = await UserService.GetCurrentUserAsync();
 
             var uri = new Uri(NavigationManager.Uri);
